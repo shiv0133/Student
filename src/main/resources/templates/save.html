@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MANAGEMENT SYSTEM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="w3-container w3-orange">
+    <h1 style="text-align:center;"><ins><b>STUDENT MANAGEMENT SYSTEM</b></ins></h1>
+</div>
+
+<form action="#" th:action="@{/save_student}"  th:object="${std}" method="POST" class="w3-container">
+    <p>
+        <label>NAME</label>
+        <input  type="text" th:field="*{Name}" placeholder="eg. Ram" class="w3-input">
+
+    </p>
+
+    <p>
+        <label>AGE</label>
+        <input  type="text"th:field="*{Age}"  placeholder="eg. 19" class="w3-input">
+
+    </p>
+
+    <p>
+        <label>SUB</label>
+        <input  type="text" th:field="*{Sub}" placeholder="eg. Hindi" class="w3-input">
+
+    </p>
+    <p>
+        <label>MARKS</label>
+        <input  type="text"  th:field="*{Marks}"  placeholder="eg. 33" class="w3-input">
+
+    </p>
+    <button type="submit" class="w3-button w3-blue"> Register Student</button>
+    <a th:href="@{/home}" class="w3-button w3-red"> Back To List</a>
+</form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+
+<body>
+<div class="w3-container w3-red">
+    <h1 style="text-align:center;"><ins><b>Student Management System</b></ins></h1>
+</div>
+<hr>
+<div class="container-fluid" style="border:3px solid #cecece;" >
+    <h2 style="text-align:center;"><ins><b>STUDENT LIST</b></ins></h2>
+</div>
+<div class="container my-2">
+    <a class="btn btn-primary" th:href="@{/show_new_form}"> Add Student </a>
+    <a class="btn btn-danger"  th:href="@{/logout}"> LogOut </a>
+    <div >
+        <h3 style="text-align: right;color: darkblue"> Total Students: [[${totalItems}]] </h3>
+    </div>
+    <table border="1" class = "table table-striped table-responsive-md">
+        <thead>
+        <tr>
+
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sub</th>
+            <th>Marks</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tr th:each="std : ${student}">
+            <th scope="row" th:text="${stdStat.index+1}">0000</th>
+            <td th:text="${std.Name}"></td>
+            <td th:text="${std.Age}"></td>
+            <td th:text="${std.Sub}"></td>
+               <td th:text="${std.Marks}"></td>
+             <td><a class="w3-button w3-green" th:href="@{/update_form/{id}(id=${std.id})}"> Update </a>
+                 <a th:href="@{/delete_student/{id}(id=${std.id})}" class="w3-button w3-red" >Delete</a>
+            </td>
+             </tr>
+         </table>
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+
+
+        <li class="page-item"><a class="page-link" href="#"
+                                 th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">Previous</a></li>
+                                <span th:unless="${currentPage > 1}"></span>
+
+
+                       <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+        <li class="page-item"><a class="page-link" href="#"
+                                 th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a></li>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                       </span>
+
+
+        <li class="page-item"><a class="page-link" href="#"
+                                 th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a></li>
+                                 <span span  th:unless="${currentPage < totalPages}"></span>
+
+
+        <li class="page-item"><a class="page-link" href="#"
+                                 th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a></li>
+                                  <span  span  th:unless="${currentPage < totalPages}"></span>
+    </ul>
+</nav>
+</div>
+     </body>
+     </html>
